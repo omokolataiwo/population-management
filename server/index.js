@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dbConnection from './config/dbConnection';
+import locationRouter from './route/location';
 
 mongoose.connect(dbConnection, {useNewUrlParser: true});
 
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use('/location', locationRouter);
 app.get('/', (req, res) => {
   return res.send('Server started.');
 });

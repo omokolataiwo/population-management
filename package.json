@@ -1,0 +1,29 @@
+{
+  "name": "PopulationManagement",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/omokolataiwo/population-management.git",
+  "author": "TAIWO KOLAWOLE <kolawole.taiwo@andela.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel server --out-dir dist",
+    "start": "node dist/index.js",
+    "start:dev": "nodemon --watch server --exec \"yarn build && yarn start\""
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.4.5",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.0"
+  }
+}

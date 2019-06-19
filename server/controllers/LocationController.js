@@ -22,14 +22,35 @@ export default class LocationController {
     );
     return res.json({location});
   }
-  static getLocation(req, res) {
-    return res.send('Routing');
+
+  static async getLocation(req, res) {
+    const {locationId} = req.params;
+    const location = await LocationModel.find(locationId);
+    return res.json({location});
   }
-  static edit(req, res) {
-    return res.send('Routing');
+
+  static async edit(req, res) {
+    const {name, malePopulation, femalePopulation, parentLocation} = req.body;
+
+    const parentLocationModel =
+      !parentLocation || (await LocationModel.find(parentLocation));
+
+    if (parentLocation && !parentLocationModel) {
+      return res.json({
+        status: 404,
+        message: 'Parent location is not a valid location.',
+      });
+    }
+    const location = await LocationModel.update(
+      name,
+      malePopulation,
+      femalePopulation,
+      parentLocation,
+    );
+
+    return res.send({location});
   }
   static delete(req, res) {
     return res.send('Routing');
   }
-
 }

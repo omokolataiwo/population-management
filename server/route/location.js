@@ -4,7 +4,7 @@ import locationController from '../controllers/LocationController';
 const locationRouter = Router();
 
 locationRouter.post('/', locationController.add);
-locationRouter.get('/:location', locationController.getLocation);
+locationRouter.get('/:locationId', locationController.getLocation);
 locationRouter.delete('/:location', locationController.delete);
 locationRouter.put('/:location', locationController.edit);
 

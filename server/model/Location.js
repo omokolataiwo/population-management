@@ -1,27 +1,45 @@
 import {Schema, model} from 'mongoose';
 
 const locationSchema = new Schema({
-  male: {
-    type: Int,
+  name: {
+    type: String,
+    required: [true, 'Location name is required.'],
     unique: true,
-    required: [true, 'Male population is required.']
+  },
+  male: {
+    type: Number,
+    required: [true, 'Male population is required.'],
   },
   female: {
-    type: Int,
-    unique: true,
-    required: [true, 'Female population is required.']
+    type: Number,
+    required: [true, 'Female population is required.'],
   },
   subLocation: {
     type: Schema.Types.ObjectId,
-    ref: 'location'
+    ref: 'location',
   },
 });
 
 const LocationModel = model('location', locationSchema);
 
-export default class Grocery {
-  static async add(male, female, subLocation) {
-    const location = new LocationModel({male, female, subLocation});
+export default class Location {
+  static async add(name, male, female, parentLocation) {
+    const location = new LocationModel({name, male, female});
     const newLocation = await location.save();
+    const pLocation = parentLocation;
+    if (parentLocation) {
+      const parentLocation = await LocationModel.findOneAndUpdate(
+        {_id: pLocation},
+        {$set: {subLocation: newLocation._id}},
+        {new: true},
+      );
+    }
+
+    return newLocation;
+  }
+
+  static async find(locationId) {
+    const location = await LocationModel.findById(locationId).populate('subLocation');
+    return location;
   }
 }

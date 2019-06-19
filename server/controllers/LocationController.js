@@ -30,24 +30,25 @@ export default class LocationController {
   }
 
   static async edit(req, res) {
-    const {name, malePopulation, femalePopulation, parentLocation} = req.body;
+    const {body} = req;
+    const fields = ['malePopulation', 'femalePopulation'];
+    const {locationId} = req.params;
 
-    const parentLocationModel =
-      !parentLocation || (await LocationModel.find(parentLocation));
+    const locationModel = await LocationModel.find(locationId);
 
-    if (parentLocation && !parentLocationModel) {
+    if (!locationModel) {
       return res.json({
         status: 404,
-        message: 'Parent location is not a valid location.',
+        message: 'Location is not a valid location.',
       });
     }
-    const location = await LocationModel.update(
-      name,
-      malePopulation,
-      femalePopulation,
-      parentLocation,
-    );
+    const editableFields = {};
 
+    fields.forEach(field => {
+      if (body[field]) editableFields[field] = body[field];
+    });
+
+    const location = await LocationModel.update(locationId, editableFields);
     return res.send({location});
   }
   static delete(req, res) {

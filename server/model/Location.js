@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import {Schema, model} from 'mongooe';
 
 const locationSchema = new Schema({
   name: {
@@ -38,8 +38,15 @@ export default class Location {
     return newLocation;
   }
 
+  static async update(id, body) {
+    const location = await LocationModel.findOneAndUpdate({_id: id}, body);
+    return location;
+  }
+
   static async find(locationId) {
-    const location = await LocationModel.findById(locationId).populate('subLocation');
+    const location = await LocationModel.findById(locationId).populate(
+      'subLocation',
+    );
     return location;
   }
 }

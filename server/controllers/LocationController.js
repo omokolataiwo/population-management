@@ -47,11 +47,23 @@ export default class LocationController {
     fields.forEach(field => {
       if (body[field]) editableFields[field] = body[field];
     });
-
     const location = await LocationModel.update(locationId, editableFields);
     return res.send({location});
   }
-  static delete(req, res) {
-    return res.send('Routing');
+  static async delete(req, res) {
+    const {locationId} = req.params;
+    let location = await LocationModel.find(locationId);
+
+    if (!location) {
+      return res.status(404).json({
+        status: 404,
+        message: 'Location does not exist',
+      });
+    }
+    location = await LocationModel.delete(locationId);
+    return res.status(200).json({
+      status: 200,
+      message: `Location ${locationId} deleted sucessfully.`,
+    });
   }
 }

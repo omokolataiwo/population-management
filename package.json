@@ -8,7 +8,9 @@
   "scripts": {
     "build": "babel server --out-dir dist",
     "start": "node dist/index.js",
-    "start:dev": "nodemon --watch server --exec \"yarn build && yarn start\""
+    "start:dev": "nodemon --watch server --exec \"yarn build && yarn start\"",
+    "test": "nyc --reporter=html --reporter=text mocha --exit -r @babel/register ./test/**/*.js",
+    "test:no:coverage": "mocha --exit -r @babel/register ./test/**/*.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -17,7 +19,11 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "@babel/runtime": "^7.4.5",
-    "nodemon": "^1.19.1"
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.1",
+    "nyc": "^14.1.1",
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

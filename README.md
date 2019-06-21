@@ -27,7 +27,7 @@ Create a location
 
    -   Run  `yarn test`
 
-   ## [](https://github.com/chykehyman/PMS#api-endpoints)API Endpoints
+   ## API Endpoints
 
    <table>
    <tr><th>USE CASE</th><th>HTTP METHOD</th><th>ENDPOINT</th></tr>

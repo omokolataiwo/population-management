@@ -136,7 +136,9 @@ describe('Location Route', () => {
       it('should delete a location with a valid locationId', done => {
         request.delete(`${url}/location/${locationId}`).end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal(`Location ${locationId} deleted sucessfully.`);
+          expect(res.body.message).to.equal(
+            `Location ${locationId} deleted sucessfully.`,
+          );
           done();
         });
       });

@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/location', locationRouter);
+app.use('/api/v1/location', locationRouter);
 app.get('/', (req, res) => {
   return res.send('Server started.');
 });

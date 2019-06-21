@@ -123,4 +123,23 @@ describe('Location Route', () => {
       });
     });
   });
+  describe('Delete Location', () => {
+    describe('when user tries to delete a location', () => {
+      it('should return not found if the location id is not valid', done => {
+        const fakeId = '5d0ba22464e2e306609c690d';
+        request.delete(`${url}/location/${fakeId}`).end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Location does not exist');
+          done();
+        });
+      });
+      it('should delete a location with a valid locationId', done => {
+        request.delete(`${url}/location/${locationId}`).end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal(`Location ${locationId} deleted sucessfully.`);
+          done();
+        });
+      });
+    });
+  });
 });

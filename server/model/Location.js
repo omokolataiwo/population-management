@@ -1,4 +1,5 @@
 import {Schema, model} from 'mongoose';
+import customErrorHandler from './customErrorHandler.js';
 
 const locationSchema = new Schema({
   name: {
@@ -20,6 +21,7 @@ const locationSchema = new Schema({
   },
 });
 
+locationSchema.post('save', customErrorHandler);
 const LocationModel = model('location', locationSchema);
 
 export default class Location {

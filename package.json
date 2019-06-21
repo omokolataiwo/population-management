@@ -9,8 +9,7 @@
     "build": "babel server --out-dir dist",
     "start": "node dist/index.js",
     "start:dev": "nodemon --watch server --exec \"yarn build && yarn start\"",
-    "test": "nyc --reporter=html --reporter=text mocha --exit -r @babel/register ./test/**/*.js",
-    "test:no:coverage": "mocha --exit -r @babel/register ./test/**/*.js"
+    "test": "mocha --exit -r @babel/register ./test/**/*.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",

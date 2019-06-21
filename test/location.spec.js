@@ -86,4 +86,41 @@ describe('Location Route', () => {
       });
     });
   });
+  describe('Edit Location', () => {
+    describe('when user enter invalid location', () => {
+      it('should respond with invalid location', done => {
+        const fakeId = '5d0ba22464e2e306609c690d';
+        request
+          .put(`${url}/location/${fakeId}`)
+          .send({
+            femalePopulation: 30,
+            malePopulation: 50,
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.message).to.equal(
+              'Location is not a valid location.',
+            );
+            done();
+          });
+      });
+    });
+
+    describe('when user enter valid location', () => {
+      it('should update existing location', done => {
+        request
+          .put(`${url}/location/${locationId}`)
+          .send({
+            femalePopulation: 3,
+            malePopulation: 5,
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.location.malePopulation).to.equal(5);
+            expect(res.body.location.femalePopulation).to.equal(3);
+            done();
+          });
+      });
+    });
+  });
 });

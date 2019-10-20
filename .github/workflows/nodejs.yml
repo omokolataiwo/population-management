@@ -20,7 +20,7 @@ jobs:
     - name: npm install, build, and test
       run: |
         curl -o- -L https://yarnpkg.com/install.sh | bash
-        yarn ci
+        yarn install
         yarn run build --if-present
         yarn test
       env:

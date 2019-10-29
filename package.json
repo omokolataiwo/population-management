@@ -16,7 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.6.0",
+    "mongoose": "^5.7.5",
     "mocha": "^6.1.4",
     "@babel/register": "^7.4.4",
      "@babel/cli": "^7.4.4",
